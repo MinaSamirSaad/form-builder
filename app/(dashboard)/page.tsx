@@ -92,7 +92,7 @@ interface StatsCardProps {
     className: string;
 
 }
-function StatsCard({ title, icon, helperText, value, loading, className }: StatsCardProps) {
+export function StatsCard({ title, icon, helperText, value, loading, className }: StatsCardProps) {
     return (
         <Card className={className}>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
