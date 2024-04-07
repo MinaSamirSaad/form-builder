@@ -1,3 +1,4 @@
+"use client";
 import { HiCursorClick } from "react-icons/hi";
 import { FormElementInstance, FormElements } from "./FormElements";
 import { Button } from "./ui/button";
