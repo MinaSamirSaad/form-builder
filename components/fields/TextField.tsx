@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 
 const type: ElementsType = "TextField";
 const extraAttributes = {
-    label: "TextField",
+    label: "Text field",
     helperText: "Text",
     required: false,
     placeHolder: "value her..."
@@ -37,7 +37,7 @@ export const TextFieldFormElement: FormElement = {
     }),
     designerBtnElement: {
         icon: MdTextFields,
-        label: "TextField"
+        label: "Text field"
     },
     designerComponent: DesignerComponent,
     FormComponent,

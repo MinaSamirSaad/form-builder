@@ -13,7 +13,7 @@ import { LuHeading2 } from "react-icons/lu";
 
 const type: ElementsType = "SubTitleField";
 const extraAttributes = {
-    title: "SubTitle Field",
+    title: "SubTitle field",
 }
 
 const propertiesSchema = z.object({
@@ -30,7 +30,7 @@ export const SubTitleFieldFormElement: FormElement = {
     }),
     designerBtnElement: {
         icon: LuHeading2,
-        label: "SubTitle Field"
+        label: "SubTitle field"
     },
     designerComponent: DesignerComponent,
     FormComponent,

@@ -13,7 +13,7 @@ import { LuHeading1 } from "react-icons/lu";
 
 const type: ElementsType = "TitleField";
 const extraAttributes = {
-    title: "Title Field",
+    title: "Title field",
 }
 
 const propertiesSchema = z.object({
@@ -30,7 +30,7 @@ export const TitleFieldFormElement: FormElement = {
     }),
     designerBtnElement: {
         icon: LuHeading1,
-        label: "Title Field"
+        label: "Title field"
     },
     designerComponent: DesignerComponent,
     FormComponent,

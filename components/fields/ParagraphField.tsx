@@ -31,7 +31,7 @@ export const ParagraphFieldFormElement: FormElement = {
     }),
     designerBtnElement: {
         icon: BsTextParagraph,
-        label: "Paragraph Field"
+        label: "Paragraph field"
     },
     designerComponent: DesignerComponent,
     FormComponent,
