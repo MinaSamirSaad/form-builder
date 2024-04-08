@@ -7,7 +7,7 @@ import SidebarBtnElement from "./SidebarBtnElement";
 const DesignerSidebar = () => {
     const { selectedElement } = useDesigner();
     return (
-        <aside className="w-[400px] max-w-[400px] flex flex-col flex-grow gap-2 boarder-l-2 border-muted p-4 bg-background overflow-y-auto h-full">
+        <aside className="md:w-[300px] max-w-[300px] flex flex-col flex-grow gap-2 boarder-l-2 border-muted p-4 bg-background overflow-y-auto h-full">
             {!selectedElement && <FormElementSidebar />}
             {selectedElement && <PropertiesFormSidebar />}
         </aside>
