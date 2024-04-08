@@ -3,12 +3,13 @@ import useDesigner from "./hooks/useDesigner";
 import { Button } from "./ui/button";
 import { AiOutlineClose } from "react-icons/ai"
 import { Separator } from "./ui/separator";
+import { BiSolidTrash } from "react-icons/bi";
 
 interface IProps {
 
 }
 const PropertiesFormSidebar = ({ }: IProps) => {
-    const { selectedElement, setSelectedElement } = useDesigner();
+    const { selectedElement, setSelectedElement, removeElement } = useDesigner();
     if (selectedElement === null) return null;
     const PropertiesForm = FormElements[selectedElement?.type].PropertiesComponent;
     return (
@@ -23,6 +24,15 @@ const PropertiesFormSidebar = ({ }: IProps) => {
             </div>
             <Separator className="mb-4" />
             <PropertiesForm elementInstance={selectedElement} />
+            <Button
+                className="rounded-md bg-red-500 text-md hover:bg-red-400 hidden max-xl:flex mt-3"
+                onClick={() => {
+                    removeElement(selectedElement.id)
+                    setSelectedElement(null);
+                }}
+            >
+                <BiSolidTrash className="h-6 w-6 text-white text-center" />
+            </Button>
         </div>
     )
 }

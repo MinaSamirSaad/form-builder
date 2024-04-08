@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BiRightArrowAlt } from "react-icons/bi"
 import { FaEdit } from "react-icons/fa"
+import DeleteFormBtn from "@/components/DeleteFormBtn";
 function Home() {
     return (
         <div className="container pt-4">
@@ -158,14 +159,23 @@ function FormCard({ form }: { form: Form }) {
             </CardContent>
             <CardFooter>
                 {form.published &&
-                    (<Button asChild className="w-full mt-2 text-md gap-4">
-                        <Link href={`/forms/${form.id}`}>View submissions <BiRightArrowAlt /></Link>
-                    </Button>)
+                    (<div className="flex justify-center align-items-center mt-2 w-full gap-1">
+                        <Button asChild className="grow text-md gap-4 rounded-md rounded-r-none">
+                            <Link href={`/forms/${form.id}`}>View submissions <BiRightArrowAlt /></Link>
+                        </Button>
+                        <DeleteFormBtn id={form.id} />
+                    </div>
+                    )
                 }
                 {!form.published &&
-                    (<Button asChild variant={"secondary"} className="w-full mt-2 text-md gap-4">
-                        <Link href={`/builder/${form.id}`}>Edit form <FaEdit /></Link>
-                    </Button>)
+                    (
+                        <div className="flex justify-center align-items-center mt-2 w-full gap-1">
+                            <Button asChild variant={"secondary"} className="grow text-md gap-4 rounded-md rounded-r-none">
+                                <Link href={`/builder/${form.id}`}>Edit form <FaEdit /></Link>
+                            </Button>
+                            <DeleteFormBtn id={form.id} />
+                        </div>
+                    )
                 }
             </CardFooter>
         </Card>

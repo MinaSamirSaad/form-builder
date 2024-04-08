@@ -152,7 +152,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
                 className="absolute w-full bottom-0 h-1/2 rounded-b-md"></div>
             {mouseIsOver && (
                 <>
-                    <div className="absolute right-0 h-full">
+                    <div className="absolute right-0 h-full hidden xl:block">
                         <Button
                             className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
                             variant={"outline"}
@@ -164,7 +164,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
                             <BiSolidTrash className="h-6 w-6 " />
                         </Button>
                     </div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse hidden xl:block">
                         <p className="text-muted-foreground text-sm">Click for properties or drag to move</p>
                     </div>
                 </>
