@@ -21,7 +21,7 @@ interface IProps {
     form: Form
 }
 const FormBuilder = ({ form }: IProps) => {
-    const { setElements } = useDesigner();
+    const { setElements, setSelectedElement } = useDesigner();
     const [isrReady, setIsReady] = useState(false);
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
@@ -38,10 +38,11 @@ const FormBuilder = ({ form }: IProps) => {
     useEffect(() => {
         if (isrReady) return;
         const elements = JSON.parse(form.content);
+        setSelectedElement(null)
         setElements(elements);
         const readyTimeout = setTimeout(() => setIsReady(true), 500);
         return () => clearTimeout(readyTimeout)
-    }, [form, isrReady, setElements])
+    }, [form, isrReady, setElements, setSelectedElement])
 
     if (!isrReady) {
         return <div className="flex flex-col items-center justify-center w-full h-full">
