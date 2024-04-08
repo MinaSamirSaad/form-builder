@@ -104,7 +104,7 @@ function FormComponent({ elementInstance, submitValue, isInvalid, defaultValue }
                 <PopoverTrigger asChild>
                     <Button variant={"outline"} className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground", error && "border-red-500s")}>
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, "ppp") : <span>Pick a date</span>}
+                        {date ? format(date, "PPP") : <span>Pick a date</span>}
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
