@@ -12,13 +12,14 @@ import useDesigner from "../hooks/useDesigner";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
+import { Bs123 } from "react-icons/bs";
 
-const type: ElementsType = "TextField";
+const type: ElementsType = "NumberField";
 const extraAttributes = {
-    label: "TextField",
+    label: "Number field",
     helperText: "Text",
     required: false,
-    placeHolder: "value her..."
+    placeHolder: "0"
 }
 
 const propertiesSchema = z.object({
@@ -28,7 +29,7 @@ const propertiesSchema = z.object({
     placeHolder: z.string().max(50)
 })
 
-export const TextFieldFormElement: FormElement = {
+export const NumberFieldFormElement: FormElement = {
     type,
     construct: (id: string) => ({
         id,
@@ -36,8 +37,8 @@ export const TextFieldFormElement: FormElement = {
         extraAttributes
     }),
     designerBtnElement: {
-        icon: MdTextFields,
-        label: "TextField"
+        icon: Bs123,
+        label: "NumberField"
     },
     designerComponent: DesignerComponent,
     FormComponent,
@@ -65,7 +66,7 @@ function DesignerComponent({ elementInstance }: {
                 {label}
                 {required && "*"}
             </Label>
-            <Input readOnly disabled placeholder={placeHolder} />
+            <Input readOnly disabled type="number" placeholder={placeHolder} />
             {helperText && <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>}
         </div>
     )
@@ -90,12 +91,13 @@ function FormComponent({ elementInstance, submitValue, isInvalid, defaultValue }
                 {required && "*"}
             </Label>
             <Input
+                type="number"
                 className={cn(error && "border-red-500")}
                 placeholder={placeHolder}
                 onChange={e => setValue(e.target.value)}
                 onBlur={(e) => {
                     if (!submitValue) return;
-                    const valid = TextFieldFormElement.validate(element, e.target.value);
+                    const valid = NumberFieldFormElement.validate(element, e.target.value);
                     setError(!valid);
                     if (!valid) return;
                     submitValue(element.id, e.target.value);
@@ -202,4 +204,4 @@ function PropertiesComponent({ elementInstance }: {
     </Form>)
 }
 
-export default TextFieldFormElement;
+export default NumberFieldFormElement;
