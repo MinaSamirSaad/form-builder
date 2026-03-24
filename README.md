@@ -4,7 +4,7 @@
 
 ## Tech Stack
 
-- Nextjs 13  with AppRouter
+- Nextjs 14  with AppRouter
 - Dnd-kit library
 - ServerActions
 - Typescript
