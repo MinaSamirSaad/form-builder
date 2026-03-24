@@ -7,7 +7,7 @@ import PublishFormBtn from "./PublishFormBtn";
 import Designer from "./Designer";
 import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import DragOverlayWrapper from "./DragOverlayWrapper";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import useDesigner from "./hooks/useDesigner";
 import { ImSpinner2 } from "react-icons/im";
 import { Input } from "./ui/input";
@@ -16,13 +16,15 @@ import { toast } from "./ui/use-toast";
 import Link from "next/link";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Confetti from "react-confetti";
+import { UpdateFormContent } from "@/actions/form";
 
 interface IProps {
     form: Form
 }
 const FormBuilder = ({ form }: IProps) => {
-    const { setElements, setSelectedElement } = useDesigner();
+    const { elements, setElements, setSelectedElement } = useDesigner();
     const [isrReady, setIsReady] = useState(false);
+
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
             distance: 10, //10px
@@ -35,14 +37,45 @@ const FormBuilder = ({ form }: IProps) => {
         }
     })
     const sensors = useSensors(mouseSensor, touchSensor)
+
+    const elementsRef = useRef(elements);
+    const lastSavedElements = useRef(JSON.stringify(elements));
+
+    useEffect(() => {
+        elementsRef.current = elements;
+    }, [elements]);
+
     useEffect(() => {
         if (isrReady) return;
         const elements = JSON.parse(form.content);
         setSelectedElement(null)
         setElements(elements);
+        lastSavedElements.current = JSON.stringify(elements);
         const readyTimeout = setTimeout(() => setIsReady(true), 500);
         return () => clearTimeout(readyTimeout)
     }, [form, isrReady, setElements, setSelectedElement])
+
+    useEffect(() => {
+        if (!isrReady || form.published) return;
+
+        const interval = setInterval(async () => {
+            const currentContent = JSON.stringify(elementsRef.current);
+            if (currentContent !== lastSavedElements.current) {
+                try {
+                    await UpdateFormContent(form.id, currentContent);
+                    lastSavedElements.current = currentContent;
+                    toast({
+                        title: "Auto-save",
+                        description: "Form saved automatically",
+                    });
+                } catch (error) {
+                    console.error("Auto-save failed", error);
+                }
+            }
+        }, 30000);
+
+        return () => clearInterval(interval);
+    }, [form.id, isrReady, form.published]);
 
     if (!isrReady) {
         return <div className="flex flex-col items-center justify-center w-full h-full">

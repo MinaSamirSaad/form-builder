@@ -14,13 +14,17 @@ import {
 import { FaIcons, FaSpinner } from "react-icons/fa";
 import { useTransition } from "react";
 import { toast } from "./ui/use-toast";
-import { PublishForm } from "@/actions/form";
+import { PublishForm, UpdateFormContent } from "@/actions/form";
 import { useRouter } from "next/navigation";
+import useDesigner from "./hooks/useDesigner";
 const PublishFormBtn = ({ id }: { id: number }) => {
     const [loading, startTransition] = useTransition();
     const router = useRouter();
+    const { elements } = useDesigner();
     async function publishForm() {
         try {
+            const jsonContent = JSON.stringify(elements);
+            await UpdateFormContent(id, jsonContent);
             await PublishForm(id)
             toast({
                 title: "Success",
